@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "src\Domain\Domain
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "apps", "apps", "{A2C01E85-09FC-48FC-A333-F168BD929FE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workshop2.Console", "apps\Workshop2.Console\Workshop2.Console.csproj", "{3EB4DC13-1C4B-4D0F-8A51-5972C2EF364C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeartBeats.Cli", "apps\HeartBeats.Cli\HeartBeats.Cli.csproj", "{3EB4DC13-1C4B-4D0F-8A51-5972C2EF364C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "src\Application\Application.csproj", "{44CCBD3E-1669-461D-B280-EFD99C4E53F4}"
 EndProject

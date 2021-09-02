@@ -2,6 +2,12 @@
 {
     public class Person
     {
+        public string Id         { get; init; }
+        public string Name       { get; init; }
+        public Genre  Genre      { get; init; }
+        public int    Age        { get; init; }
+        public double HeartBeats => ((int)Genre - Age) / 10.0;
+
         public Person(string id, string name, int age, Genre genre)
         {
             Id    = id;
@@ -10,11 +16,6 @@
             Genre = genre;
         }
 
-        public string Id         { get; init; }
-        public string Name       { get; init; }
-        public Genre  Genre      { get; init; }
-        public int    Age        { get; init; }
-        public double HeartBeats => ((int)Genre - Age) / 10.0;
 
         public void Deconstruct(out string id, out string name, out int age,
             out Genre genre,
