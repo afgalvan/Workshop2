@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
-using Domain.People;
 
 namespace HeartBeats.Cli
 {
+    public record PersonData(string Id, string Name, int Age, char Genre);
+
     public class RegistrationCli
     {
-        public static Person ReadPersonData()
+        public static PersonData ReadPersonData()
         {
             (string id, string name) = AskDataWithoutValidation();
-            return new Person(id, name, AskAge(), AskGenre());
+            return new PersonData(id, name, AskAge(), AskGenre());
         }
 
         private static (string, string) AskDataWithoutValidation()
@@ -45,31 +46,28 @@ namespace HeartBeats.Cli
             return AskNumericData("Ingresa tu edad: ", Convert.ToInt32);
         }
 
-        private static Genre AskGenre()
+        private static char AskGenre()
         {
             while (true)
             {
                 Console.Write("Ingresa tu género [F/M]: ");
                 try
                 {
-                    return MapCharToGenre(Console.ReadLine()
+                    return CheckForGenre(Console.ReadLine()
                         ?.ToUpper(CultureInfo.InvariantCulture).FirstOrDefault());
                 }
-                catch (InvalidGenreException e)
+                catch (InvalidOperationException e)
                 {
                     Console.WriteLine(e.Message);
                 }
             }
         }
 
-        private static Genre MapCharToGenre(char? letter)
+        private static char CheckForGenre(char? letter) => letter switch
         {
-            return letter switch
-            {
-                'F' => Genre.Female,
-                'M' => Genre.Male,
-                _ => throw new InvalidGenreException("Genero inválido.")
-            };
-        }
+            'F' => 'F',
+            'M' => 'M',
+            _ => throw new InvalidOperationException("Genero inválido.")
+        };
     }
 }

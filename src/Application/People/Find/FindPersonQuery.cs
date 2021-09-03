@@ -1,9 +1,8 @@
-﻿using Domain.People;
-using Shared.Domain.Bus.Query;
+﻿using Shared.Domain.Bus.Query;
 
 namespace Application.People.Find
 {
-    public class FindPersonQuery : IQuery<Person>
+    public class FindPersonQuery : IQuery<PersonResponse>
     {
         public FindPersonQuery(string id)
         {

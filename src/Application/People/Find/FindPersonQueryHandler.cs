@@ -1,11 +1,11 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using Domain.People;
+using Mapster;
 using Shared.Domain.Bus.Query;
 
 namespace Application.People.Find
 {
-    public class FindPersonQueryHandler : IQueryHandler<FindPersonQuery, Person>
+    public class FindPersonQueryHandler : IQueryHandler<FindPersonQuery, PersonResponse>
     {
         private readonly PersonFinder _personFinder;
 
@@ -14,10 +14,10 @@ namespace Application.People.Find
             _personFinder = personFinder;
         }
 
-        public async Task<Person> Handle(FindPersonQuery request,
+        public async Task<PersonResponse> Handle(FindPersonQuery request,
             CancellationToken cancellationToken)
         {
-            return await _personFinder.Find(request.Id, cancellationToken);
+            return (await _personFinder.Find(request.Id, cancellationToken))?.Adapt<PersonResponse>();
         }
     }
 }

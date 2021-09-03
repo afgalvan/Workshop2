@@ -3,8 +3,8 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.People.Create;
+using Application.People.Find;
 using Application.People.GetAll;
-using Domain.People;
 using MediatR;
 using Microsoft.Extensions.Hosting;
 
@@ -36,12 +36,19 @@ namespace HeartBeats.Cli
 
         private async Task HelloWorld(CancellationToken cancellationToken)
         {
-            Person person = RegistrationCli.ReadPersonData();
+            PersonData person = RegistrationCli.ReadPersonData();
 
-            CreatePersonCommand createCommand = new(person.Id, person.Name, person.Age, 'm');
+            CreatePersonCommand createCommand = new(person.Id, person.Name, person.Age, person.Genre);
             await _mediator.Send(createCommand, cancellationToken);
 
-            (await _mediator.Send(new GetAllPeopleQuery(), cancellationToken)).ToList()
+            Console.WriteLine("\nFind by id: ");
+            var response =
+                await _mediator.Send(new FindPersonQuery(person.Id), cancellationToken);
+            Console.WriteLine(response);
+
+            Console.WriteLine("\nAll people registered: ");
+            (await _mediator.Send(new GetAllPeopleQuery(), cancellationToken))
+                .ToList()
                 .ForEach(Console.WriteLine);
         }
     }

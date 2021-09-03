@@ -27,10 +27,5 @@
             genre      = Genre;
             heartBeats = HeartBeats;
         }
-
-        public override string ToString()
-        {
-            return $"{Id}, {Name}, {Age}, {Genre}, {HeartBeats}";
-        }
     }
 }
